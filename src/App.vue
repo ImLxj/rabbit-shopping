@@ -2,7 +2,9 @@
 </script>
 
 <template>
-  <div></div>
+  <div>
+    <el-button type="primary">确定</el-button>
+  </div>
 </template>
 
 <style scoped>
