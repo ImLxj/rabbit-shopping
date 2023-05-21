@@ -2,9 +2,7 @@
 </script>
 
 <template>
-  <div>
-    <el-button type="primary">确定</el-button>
-  </div>
+  <router-view></router-view>
 </template>
 
 <style scoped>
