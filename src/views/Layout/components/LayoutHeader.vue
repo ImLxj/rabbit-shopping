@@ -1,4 +1,8 @@
 <script setup>
+// 获取状态管理的导航数据
+import { useCategoryStore } from '@/stores/category'
+import { storeToRefs } from 'pinia'
+const { categoryList } = storeToRefs(useCategoryStore())
 </script>
 
 <template>
@@ -8,12 +12,9 @@
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
-        <li class="home">
-          <RouterLink to="/">首页</RouterLink>
+        <li class="home" v-for="item in categoryList" :key="item.id">
+          <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
-        <li><RouterLink to="/">居家</RouterLink></li>
-        <li><RouterLink to="/">美食</RouterLink></li>
-        <li><RouterLink to="/">服饰</RouterLink></li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
@@ -42,7 +43,7 @@
       height: 132px;
       width: 100%;
       text-indent: -9999px;
-      background: url("@/assets/images/logo.png") no-repeat center 18px /
+      background: url('@/assets/images/logo.png') no-repeat center 18px /
         contain;
     }
   }
