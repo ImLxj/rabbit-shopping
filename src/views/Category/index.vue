@@ -1,42 +1,10 @@
 <script setup>
-import { getSecondaryCategoryApi, getBannerApi } from '@/apis/instance'
-import { onMounted, ref } from 'vue'
-import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import GoodsItem from '@/views/Home/components/GoodsItem.vue'
+import { useBanner } from './composables/useBanner'
+import { useCategory } from './composables/userCategory'
 
-const secondaryCategory = ref({})
-const bannerList = ref([])
-const route = useRoute()
-
-// 获取二级分类的数据
-const getSecondaryCategory = async (id = route.params.id) => {
-  const res = await getSecondaryCategoryApi(id)
-  if (res.code === '1') {
-    secondaryCategory.value = res.result
-  }
-}
-
-// 获取banner轮播图数据
-const getBanner = async () => {
-  const res = await getBannerApi({
-    distributionSite: 2
-  })
-  if (res.code === '1') {
-    bannerList.value = res.result
-  }
-}
-
-onMounted(() => {
-  getSecondaryCategory()
-  getBanner()
-})
-
-// 当路由发生变化时从新发起请求
-onBeforeRouteUpdate((to) => {
-  console.log('路由发生变化了')
-  getSecondaryCategory(to.params.id)
-})
-
+const { bannerList } = useBanner()
+const { secondaryCategory } = useCategory()
 </script>
 
 <template>
